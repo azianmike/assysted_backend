@@ -76,8 +76,8 @@ WSGI_APPLICATION = 'assysted_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django_mongodb_engine',
-        'NAME': 'assysted_db',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'os.path.join(PROJECT_DIR, \'assysted_app.db\')',
     }
 }
 

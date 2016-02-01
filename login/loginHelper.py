@@ -1,5 +1,6 @@
 from json import dumps
 from register.models import User
+from hashPasswords import passwords
 
 __author__ = 'michaell'
 
@@ -30,7 +31,8 @@ def loginWithEmailAndName(emailPost, passwordPost):
     returnDict['success'] = -1
 
     try:
-        checkForUser = User.objects.get(email=emailPost, password=passwordPost)
+        hashedPassword = passwords.hashPassword(passwordPost, emailPost)
+        checkForUser = User.objects.get(email=emailPost, password=hashedPassword)
         if checkForUser.activated == False:
             returnDict['success'] = -3
             returnDict['message'] = 'Please activate your email'

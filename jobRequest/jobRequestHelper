@@ -1,0 +1,13 @@
+from jobRequest.models import JobRequest
+
+def submitJobRequest( request ):
+    '''
+    
+    :param request:
+    :return:
+    '''
+
+    userIdPost = request.POST.get('userId','')
+    emailPost = request.POST.get('email', '')
+    descriptionPost = request.POST.get('description', '')
+    userSubmitPrice = request.POST.get('userSubmitPrice', '')

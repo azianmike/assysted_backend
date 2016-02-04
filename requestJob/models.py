@@ -3,8 +3,12 @@ from mongoengine.fields import *
 
 connect('assysted_DB')
 
-class User2(document.Document):
+class JobRequest(document.Document):
     email = StringField(required=True)
-    password = StringField(required=True)
-    activated = BooleanField(required=True)
-    joinDate = DateTimeField()
+    stillSearching = BooleanField(required=True)
+    timeOfRequest = DateTimeField()
+    description = StringField(required=True)
+    userSubmitPrice = IntField(required=True)
+    listOfBidders = ListField( field=[ObjectIdField, StringField ], required=True )
+    listOfBids = ListField( field=IntField, required=True )
+

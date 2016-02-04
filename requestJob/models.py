@@ -4,6 +4,7 @@ from mongoengine.fields import *
 connect('assysted_DB')
 
 class JobRequest(document.Document):
+    userId = ObjectIdField(required=True) #user objectID
     email = StringField(required=True)
     stillSearching = BooleanField(required=True)
     timeOfRequest = DateTimeField()

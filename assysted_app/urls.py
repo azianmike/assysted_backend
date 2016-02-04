@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/register', 'register.views.index', name='register'),
     url(r'^api/login', 'login.views.index', name='login'),
+    url(r'^api/requestJob', 'jobRequest.views.requestJob', name='requestJob'),
+
 ]

@@ -1,7 +1,6 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from re import match
-from django.template.defaulttags import csrf_token
 from json import dumps
 import datetime
 from .models import User
@@ -27,12 +26,9 @@ def index(request):
             returnDict['success'] = -1
             returnDict['message']='Invalid email address'
             return HttpResponse(dumps(returnDict))
-        #f='%Y-%m-%d'
-        #now = datetime.datetime.now()
-        #mysqlTime = now.strftime(f)
-        #userToAdd = User.objects.create(_id=emailPost, password=passwordPost, joinDate=mysqlTime)
-        import datetime
-        joinDateTime = datetime.datetime.now()
+
+        from datetime import datetime
+        joinDateTime = datetime.now()
         hashedPassword = passwords.hashPassword(passwordPost, emailPost)        
         userToAdd = User(email=emailPost, password=hashedPassword, activated=True, joinDate = joinDateTime)
         userToAdd.save()

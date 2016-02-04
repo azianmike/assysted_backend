@@ -46,12 +46,31 @@ def loginWithEmailAndName(emailPost, passwordPost):
         return returnDict
 
 
-def checkObjectID(request):
+def checkUserID(request):
     returnDict = {}
     returnDict['success'] = -1
     objectID = request.POST.get("objectID", "")
+    return check_user_id(objectID, returnDict)
+
+
+def check_user_id(objectID, returnDict):
     try:
         checkForUser = User.objects.get(id=objectID)
+        returnDict['success'] = 1
+        returnDict['message'] = 'objectID exists!'
+        returnDict['email'] = checkForUser.email
+
+        return returnDict
+
+    except User.DoesNotExist:
+        returnDict['success'] = 0
+        returnDict['message'] = 'objectID does not exist'
+        return returnDict
+
+def check_user_id_and_email(objectID, emailString):
+    returnDict = {}
+    try:
+        checkForUser = User.objects.get(id=objectID, email=emailString)
         returnDict['success'] = 1
         returnDict['message'] = 'objectID exists!'
         returnDict['email'] = checkForUser.email

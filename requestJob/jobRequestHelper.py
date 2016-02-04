@@ -36,7 +36,7 @@ def submit_job_request(user_id_post, email_post, description_post, user_submit_p
     job_to_add = JobRequest(userId=user_id_post, email=email_post, stillSearching=True)
     from datetime import datetime
     job_to_add.timeOfRequest = datetime.now()
-    job_to_add.userSubmitPrice = user_submit_price
+    job_to_add.userSubmitPrice = int(user_submit_price)
     job_to_add.description = description_post
     job_to_add.listOfBidders = [[user_id_post, email_post], [user_id_post, 'testing']]
     job_to_add.listOfBids = [10, 11]

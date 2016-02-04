@@ -1,5 +1,14 @@
-from __future__ import unicode_literals
+from mongoengine import connect, document
+from mongoengine.fields import *
 
-from django.db import models
+connect('assysted_DB')
 
-# Create your models here.
+class JobRequest(document.Document):
+    userId = ObjectIdField(required=True) #user objectID
+    email = StringField(required=True)
+    stillSearching = BooleanField(required=True)
+    timeOfRequest = DateTimeField()
+    description = StringField(required=True)
+    userSubmitPrice = IntField(required=True)
+    listOfBidders = ListField( field=[ObjectIdField, StringField ], required=True )
+    listOfBids = ListField( field=IntField, required=True )

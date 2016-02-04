@@ -1,4 +1,5 @@
 from mongoengine import connect
+from mongoengine.fields import *
 
 connect('assysted_DB')
 

@@ -9,6 +9,6 @@ class JobRequest(document.Document):
     timeOfRequest = DateTimeField()
     description = StringField(required=True)
     userSubmitPrice = IntField(required=True)
-    listOfBidders = ListField( field=[ObjectIdField, StringField ], required=True )
+    listOfBidders = ListField( field=ListField, required=True )
     listOfBids = ListField( field=IntField, required=True )
 

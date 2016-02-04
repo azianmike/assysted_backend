@@ -1,5 +1,6 @@
-from jobRequest.models import JobRequest
+from requestJob.models import JobRequest
 from login.loginHelper import check_user_id_and_email
+from mongoengine.fields import *
 
 
 def submitJobRequest( request ):
@@ -39,7 +40,7 @@ def submit_job_request(user_id_post, email_post, description_post, user_submit_p
     job_to_add.userSubmitPrice = int(user_submit_price)
     job_to_add.description = description_post
     job_to_add.listOfBidders = [[user_id_post, email_post], [user_id_post, 'testing']]
-    job_to_add.listOfBids = [10, 11]
+    job_to_add.listOfBids = [IntField(10), IntField(11)]
     job_to_add.save()
 
     returnDict = {}

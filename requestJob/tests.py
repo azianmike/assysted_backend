@@ -12,9 +12,13 @@ class JobSearchTests(TestCase):
         submitPostData['email'] = 'testhash2@test.com'
         submitPostData['userRequestPrice'] = 10
         submitPostData['jobCategory'] = 'TestingCategory'
-        full_url = url+'api/searchJob/'
-        response = post(url, data=submitPostData)
-        responseObj = loads(response)
+        full_url = url+'api/searchJob'
+        response = post(full_url, data=submitPostData)
+        print full_url
+        print 'response\n'
+        print str(response.content)
+        responseObj = loads(response.content)
+
         self.assertEqual(responseObj['success'], 1)
         self.assertEqual(responseObj['message'], 'Job request successful')
 

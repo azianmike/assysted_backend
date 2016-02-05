@@ -3,7 +3,7 @@ from login.loginHelper import check_user_id_and_email
 from mongoengine.fields import *
 
 
-def submit_job_search( request ):
+def submitJobSearch( request ):
     '''
     
     :param request:
@@ -16,7 +16,7 @@ def submit_job_search( request ):
     jobCategory = request.POST.get('jobCategory', '')
 
     if check_user_id_and_email(userIdPost, emailPost)['success'] == 1:
-        return submit_job_request(userIdPost, emailPost, userRequestPrice, jobCategory)
+        return submit_job_search(userIdPost, emailPost, userRequestPrice, jobCategory)
 
     else:
         returnDict = {}
@@ -25,7 +25,7 @@ def submit_job_search( request ):
         return returnDict
 
 
-def submit_job_request(user_id_post, email_post, userRequestPrice, jobCategory):
+def submit_job_search(user_id_post, email_post, userRequestPrice, jobCategory):
     '''
 
     :param user_id_post:

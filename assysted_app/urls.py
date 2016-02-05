@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^api/register', 'register.views.index', name='register'),
     url(r'^api/login', 'login.views.index', name='login'),
     url(r'^api/requestJob', 'requestJob.views.requestJob', name='requestJob'),
+    url(r'^api/searchJob', 'requestJob.views.submit_job_search', name='searchJob'),
 
 ]

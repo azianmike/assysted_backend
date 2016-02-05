@@ -1,9 +1,9 @@
-from requestJob.models import job_request
+from requestJob.models import job_search
 from login.loginHelper import check_user_id_and_email
 from mongoengine.fields import *
 
 
-def submitJobRequest( request ):
+def submit_job_search( request ):
     '''
     
     :param request:
@@ -12,11 +12,11 @@ def submitJobRequest( request ):
 
     userIdPost = request.POST.get('userId','')
     emailPost = request.POST.get('email', '')
-    descriptionPost = request.POST.get('description', '')
-    userSubmitPrice = request.POST.get('userSubmitPrice', '')
+    userRequestPrice = request.POST.get('userRequestPrice', '')
+    jobCategory = request.POST.get('jobCategory', '')
 
     if check_user_id_and_email(userIdPost, emailPost)['success'] == 1:
-        return submit_job_request(userIdPost, emailPost, descriptionPost, userSubmitPrice)
+        return submit_job_request(userIdPost, emailPost, userRequestPrice, jobCategory)
 
     else:
         returnDict = {}
@@ -25,7 +25,7 @@ def submitJobRequest( request ):
         return returnDict
 
 
-def submit_job_request(user_id_post, email_post, description_post, user_submit_price):
+def submit_job_request(user_id_post, email_post, userRequestPrice, jobCategory):
     '''
 
     :param user_id_post:
@@ -34,14 +34,12 @@ def submit_job_request(user_id_post, email_post, description_post, user_submit_p
     :param user_submit_price:
     :return:
     '''
-    job_to_add = job_request(userId=user_id_post, email=email_post, stillSearching=True)
+    jobSearchToAdd = job_search(userId=user_id_post, email=email_post, stillSearching=True)
     from datetime import datetime
-    job_to_add.timeOfRequest = datetime.now()
-    job_to_add.userSubmitPrice = int(user_submit_price)
-    job_to_add.description = description_post
-    job_to_add.listOfBidders = [{user_id_post:email_post}, {user_id_post:'testing'}]
-    job_to_add.listOfBids = [10, 11]
-    job_to_add.save()
+    jobSearchToAdd.timeOfRequest = datetime.now()
+    jobSearchToAdd.userRequestPrice = int(userRequestPrice)
+    jobSearchToAdd.jobCategory = jobCategory
+    jobSearchToAdd.save()
 
     returnDict = {}
     returnDict['success'] = 1

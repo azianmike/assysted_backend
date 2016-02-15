@@ -14,10 +14,10 @@ def submitJobRequest( request ):
     emailPost = request.POST.get('email', '')
     descriptionPost = request.POST.get('description', '')
     userSubmitPrice = request.POST.get('userSubmitPrice', '')
+    jobCategory = request.POST.get('jobCategory', '')
 
     if check_user_id_and_email(userIdPost, emailPost)['success'] == 1:
-        return submit_job_request(userIdPost, emailPost, descriptionPost, userSubmitPrice)
-
+        return submit_job_request(userIdPost, emailPost, descriptionPost, userSubmitPrice, jobCategory)
     else:
         returnDict = {}
         returnDict['success'] = -1
@@ -25,7 +25,7 @@ def submitJobRequest( request ):
         return returnDict
 
 
-def submit_job_request(user_id_post, email_post, description_post, user_submit_price):
+def submit_job_request(user_id_post, email_post, description_post, user_submit_price, job_category):
     '''
 
     :param user_id_post:
@@ -41,6 +41,7 @@ def submit_job_request(user_id_post, email_post, description_post, user_submit_p
     job_to_add.description = description_post
     job_to_add.listOfBidders = [{user_id_post:email_post}, {user_id_post:'testing'}]
     job_to_add.listOfBids = [10, 11]
+    job_to_add.jobCategory = job_category
     job_to_add.save()
 
     returnDict = {}

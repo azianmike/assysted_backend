@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from requestJob.jobRequestHelper import submitJobRequest
-from requestJob.jobSubmitHelper import submitJobSearch
+from requestJob.jobSearchHelper import submitJobSearch
 
 
 # Create your views here.

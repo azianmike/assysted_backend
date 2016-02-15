@@ -6,7 +6,7 @@ job_categories_dict = {'copywriting': True, 'data entry': True, 'social media': 
 
 
 def is_valid_category(category_to_check):
-    return job_categories_dict.has_key(category_to_check)
+    return category_to_check in job_categories_dict
 
 
 def get_categories():

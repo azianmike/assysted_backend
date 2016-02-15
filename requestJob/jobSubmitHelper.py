@@ -1,6 +1,7 @@
 from requestJob.models import job_search
 from login.loginHelper import check_user_id_and_email
 from mongoengine.fields import *
+from job_categories import is_valid_category
 
 
 def submitJobSearch( request ):

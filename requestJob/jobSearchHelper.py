@@ -20,7 +20,7 @@ def submitJobSearch( request ):
         if is_valid_category(jobCategory):
             return submit_job_search(userIdPost, emailPost, userRequestPrice, jobCategory)
         else:
-            create_return_dict(-1, 'Invalid job category')
+            return create_return_dict(-1, 'Invalid job category')
     else:
         return create_return_dict(-1,'User does not exist!' )
 

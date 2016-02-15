@@ -1,6 +1,6 @@
+from requestJob.helper_func import create_return_dict
 from requestJob.models import job_search
 from login.loginHelper import check_user_id_and_email
-from mongoengine.fields import *
 from requestJob.job_categories import is_valid_category
 
 
@@ -23,13 +23,6 @@ def submitJobSearch( request ):
             create_return_dict(-1, 'Invalid job category')
     else:
         return create_return_dict(-1,'User does not exist!' )
-
-
-def create_return_dict(success_code, message):
-    returnDict = {}
-    returnDict['success'] = success_code
-    returnDict['message'] = message
-    return returnDict
 
 
 def submit_job_search(user_id_post, email_post, userRequestPrice, jobCategory):

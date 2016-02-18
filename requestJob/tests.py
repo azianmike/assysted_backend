@@ -15,7 +15,7 @@ class JobSearchTests(TestCase):
         full_url = url+'api/searchJob'
         response = post(full_url, data=submitPostData)
         print full_url
-        print 'response\n'
+        print 'response'
         print str(response.content)
         responseObj = loads(response.content)
 
@@ -38,7 +38,7 @@ class JobSearchTests(TestCase):
         full_url = url+'api/requestJob'
         response = post(full_url, data=submitPostData)
         print full_url
-        print 'response\n'
+        print 'response'
         print str(response.content)
         responseObj = loads(response.content)
 
@@ -49,7 +49,7 @@ class JobSearchTests(TestCase):
             checkForJobSearch = job_search.objects.get( userId = '56b2cd3e3907c32099dbad18', userRequestPrice = 10, jobCategory='copywriting' )
             checkForJobSearch.delete()
         except job_search.DoesNotExist:
-            self.assertEqual(True, False, "Job search does not exist in mongo")
+            self.assertEqual(True, False, "Job request does not exist in mongo")
 
     def test_submit_request_invalid_price(self):
         submitPostData = {'userId':'56b2cd3e3907c32099dbad18'}
@@ -61,7 +61,7 @@ class JobSearchTests(TestCase):
         full_url = url+'api/requestJob'
         response = post(full_url, data=submitPostData)
         print full_url
-        print 'response\n'
+        print 'response'
         print str(response.content)
         responseObj = loads(response.content)
 
@@ -76,7 +76,7 @@ class JobSearchTests(TestCase):
         full_url = url+'api/searchJob'
         response = post(full_url, data=submitPostData)
         print full_url
-        print 'response\n'
+        print 'response'
         print str(response.content)
         responseObj = loads(response.content)
 

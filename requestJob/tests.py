@@ -8,6 +8,7 @@ url = 'http://ec2-52-71-164-78.compute-1.amazonaws.com/'
 class JobSearchTests(TestCase):
 
     def test_submit_search(self):
+        print 'test_submit_search'
         submitPostData = {'userId':'56b2cd3e3907c32099dbad18'}
         submitPostData['email'] = 'testhash2@test.com'
         submitPostData['userRequestPrice'] = 10
@@ -29,6 +30,7 @@ class JobSearchTests(TestCase):
             self.assertEqual(True, False, "Job search does not exist in mongo")
 
     def test_submit_request(self):
+        print 'test_submit_request'
         submitPostData = {'userId':'56b2cd3e3907c32099dbad18'}
         submitPostData['email'] = 'testhash2@test.com'
         submitPostData['userRequestPrice'] = 10
@@ -52,6 +54,7 @@ class JobSearchTests(TestCase):
             self.assertEqual(True, False, "Job request does not exist in mongo")
 
     def test_submit_request_invalid_price(self):
+        print 'test_submit_request_invalid_price'
         submitPostData = {'userId':'56b2cd3e3907c32099dbad18'}
         submitPostData['email'] = 'testhash2@test.com'
         submitPostData['userRequestPrice'] = 1
@@ -69,6 +72,7 @@ class JobSearchTests(TestCase):
         self.assertEqual(responseObj['message'], 'Invalid request price')
 
     def test_submit_search_invalid_price(self):
+        print 'test_submit_search_invalid_price'
         submitPostData = {'userId':'56b2cd3e3907c32099dbad18'}
         submitPostData['email'] = 'testhash2@test.com'
         submitPostData['userRequestPrice'] = 6

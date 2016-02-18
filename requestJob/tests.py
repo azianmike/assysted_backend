@@ -11,7 +11,7 @@ class JobSearchTests(TestCase):
         submitPostData = {'userId':'56b2cd3e3907c32099dbad18'}
         submitPostData['email'] = 'testhash2@test.com'
         submitPostData['userRequestPrice'] = 10
-        submitPostData['jobCategory'] = 'TestingCategory'
+        submitPostData['jobCategory'] = 'copywriting'
         full_url = url+'api/searchJob'
         response = post(full_url, data=submitPostData)
         print full_url
@@ -32,7 +32,7 @@ class JobSearchTests(TestCase):
         submitPostData = {'userId':'56b2cd3e3907c32099dbad18'}
         submitPostData['email'] = 'testhash2@test.com'
         submitPostData['userRequestPrice'] = 10
-        submitPostData['jobCategory'] = 'TestingCategory'
+        submitPostData['jobCategory'] = 'copywriting'
         submitPostData['description'] = 'TESTING A DESCRIPTION'
 
         full_url = url+'api/requestJob'

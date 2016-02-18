@@ -3,6 +3,10 @@ from requestJob.models import job_search
 from login.loginHelper import check_user_id_and_email
 from requestJob.job_categories import is_valid_category
 
+def invalid_price( price ):
+    if price<10 or price >1000:
+        return True
+    return False
 
 def submitJobSearch( request ):
     '''
@@ -15,6 +19,9 @@ def submitJobSearch( request ):
     emailPost = request.POST.get('email', '')
     userRequestPrice = request.POST.get('userRequestPrice', '')
     jobCategory = request.POST.get('jobCategory', '')
+
+    if invalid_price( int(userRequestPrice) ):
+        return create_return_dict(-1, 'Invalid request price')
 
     if check_user_id_and_email(userIdPost, emailPost)['success'] == 1:
         if is_valid_category(jobCategory):

@@ -4,6 +4,12 @@ from mongoengine.fields import *
 from requestJob.job_categories import is_valid_category
 from requestJob.helper_func import create_return_dict
 
+def invalid_price( price ):
+    if price<10 or price >1000:
+        return True
+    return False
+
+
 def submitJobRequest( request ):
     '''
     
@@ -16,6 +22,9 @@ def submitJobRequest( request ):
     descriptionPost = request.POST.get('description', '')
     userSubmitPrice = request.POST.get('userRequestPrice', '')
     jobCategory = request.POST.get('jobCategory', '')
+
+    if invalid_price( int(userSubmitPrice) ):
+        return create_return_dict(-1, 'Invalid request price')
 
     if check_user_id_and_email(userIdPost, emailPost)['success'] == 1:
         if is_valid_category(jobCategory):

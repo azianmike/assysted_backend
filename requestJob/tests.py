@@ -1,7 +1,7 @@
 from django.test import TestCase
 from requests import post
 from json import loads
-from requestJob.models import job_search
+from requestJob.models import job_search, job_request
 
 # Create your tests here.
 url = 'http://ec2-52-71-164-78.compute-1.amazonaws.com/'
@@ -48,7 +48,7 @@ class JobSearchTests(TestCase):
         self.assertEqual(responseObj['message'], 'Job request successful')
 
         try:
-            checkForJobSearch = job_search.objects.get( userId = '56b2cd3e3907c32099dbad18', userRequestPrice = 10, jobCategory='copywriting' )
+            checkForJobSearch = job_request.objects.get( userId = '56b2cd3e3907c32099dbad18', userRequestPrice = 10, jobCategory='copywriting' )
             checkForJobSearch.delete()
         except job_search.DoesNotExist:
             self.assertEqual(True, False, "Job request does not exist in mongo")

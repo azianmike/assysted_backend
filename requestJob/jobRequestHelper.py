@@ -14,7 +14,7 @@ def submitJobRequest( request ):
     userIdPost = request.POST.get('userId','')
     emailPost = request.POST.get('email', '')
     descriptionPost = request.POST.get('description', '')
-    userSubmitPrice = request.POST.get('userSubmitPrice', '')
+    userSubmitPrice = request.POST.get('userRequestPrice', '')
     jobCategory = request.POST.get('jobCategory', '')
 
     if check_user_id_and_email(userIdPost, emailPost)['success'] == 1:

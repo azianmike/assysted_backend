@@ -68,7 +68,7 @@ class JobSearchTests(TestCase):
         self.assertEqual(responseObj['success'], -1)
         self.assertEqual(responseObj['message'], 'Invalid request price')
 
-    def test_submit_search(self):
+    def test_submit_search_invalid_price(self):
         submitPostData = {'userId':'56b2cd3e3907c32099dbad18'}
         submitPostData['email'] = 'testhash2@test.com'
         submitPostData['userRequestPrice'] = 6

@@ -68,12 +68,6 @@ class JobSearchTests(TestCase):
         self.assertEqual(responseObj['success'], -1)
         self.assertEqual(responseObj['message'], 'Invalid request price')
 
-        try:
-            checkForJobSearch = job_search.objects.get( userId = '56b2cd3e3907c32099dbad18', userRequestPrice = 10, jobCategory='copywriting' )
-            checkForJobSearch.delete()
-        except job_search.DoesNotExist:
-            self.assertEqual(True, False, "Job search does not exist in mongo")
-
     def test_submit_search(self):
         submitPostData = {'userId':'56b2cd3e3907c32099dbad18'}
         submitPostData['email'] = 'testhash2@test.com'
@@ -88,9 +82,3 @@ class JobSearchTests(TestCase):
 
         self.assertEqual(responseObj['success'], -1)
         self.assertEqual(responseObj['message'], 'Invalid request price')
-
-        try:
-            checkForJobSearch = job_search.objects.get( userId = '56b2cd3e3907c32099dbad18', userRequestPrice = 10, jobCategory='copywriting' )
-            checkForJobSearch.delete()
-        except job_search.DoesNotExist:
-            self.assertEqual(True, False, "Job search does not exist in mongo")

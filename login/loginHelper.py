@@ -47,13 +47,29 @@ def loginWithEmailAndName(emailPost, passwordPost):
 
 
 def checkUserID(request):
+    '''
+    Checks if the user ID is a valid user id
+    :param request:
+    :return:
+    '''
     returnDict = {}
     returnDict['success'] = -1
     objectID = request.POST.get("objectID", "")
-    return check_user_id(objectID, returnDict)
+    return check_user_id(objectID)
 
+def check_user_id_exists(objectId):
+    if check_user_id(objectId)['success'] == 1:
+        return True
+    return False
 
-def check_user_id(objectID, returnDict):
+def check_user_id(objectID):
+    '''
+    Checks to see if the user id is valid
+    :param objectID:
+    :param returnDict:
+    :return:
+    '''
+    returnDict = {}
     try:
         checkForUser = User.objects.get(id=objectID)
         returnDict['success'] = 1

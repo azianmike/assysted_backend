@@ -8,3 +8,5 @@ class User(document.Document):
     password = StringField(required=True)
     activated = BooleanField(required=True)
     joinDate = DateTimeField()
+    avgRating = DecimalField(precision=3,required=True, default=0)
+    numRatings = IntField(required=True, default=0)

@@ -30,7 +30,7 @@ def putReviewIn(reviewerPost, userBeingReviewedPost, ratingPost, descriptionPost
     :return:
     '''
     if check_user_id_exists(reviewerPost) and check_user_id_exists(userBeingReviewedPost):
-        ratingToAdd = Rating(reviewer=reviewerPost, userBeingReviewed=userBeingReviewedPost, rating=Int(ratingPost), description=descriptionPost)
+        ratingToAdd = Rating(reviewer=reviewerPost, userBeingReviewed=userBeingReviewedPost, rating=int(ratingPost), description=descriptionPost)
         ratingToAdd.save()
         return create_return_dict(1, 'Successfully added review!')
 

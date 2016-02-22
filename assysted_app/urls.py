@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^api/login', 'login.views.index', name='login'),
     url(r'^api/requestJob', 'requestJob.views.requestJob', name='requestJob'),
     url(r'^api/searchJob', 'requestJob.views.submit_job_search', name='searchJob'),
+    url(r'^api/submitReview', 'reviews.views.index', name='submitReview'),
 
 ]

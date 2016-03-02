@@ -1,5 +1,5 @@
 from requestJob.models import job_request
-from login.loginHelper import check_user_id_and_email
+from login.loginHelper import check_user_id_and_email, get_user
 from mongoengine.fields import *
 from requestJob.job_categories import is_valid_category
 from requestJob.helper_func import create_return_dict
@@ -26,16 +26,17 @@ def submitJobRequest( request ):
     if invalid_price( int(userSubmitPrice) ):
         return create_return_dict(-1, 'Invalid request price')
 
-    if check_user_id_and_email(userIdPost, emailPost)['success'] == 1:
+    checkUser = get_user(userIdPost, emailPost)
+    if checkUser is not None:
         if is_valid_category(jobCategory):
-            return submit_job_request(userIdPost, emailPost, descriptionPost, userSubmitPrice, jobCategory)
+            return submit_job_request(userIdPost, emailPost, descriptionPost, userSubmitPrice, jobCategory, checkUser)
         else:
             return create_return_dict(-1, 'Invalid job category')
     else:
         return create_return_dict(-1, 'User does not exist!')
 
 
-def submit_job_request(user_id_post, email_post, description_post, user_submit_price, job_category):
+def submit_job_request(user_id_post, email_post, description_post, user_submit_price, job_category, user):
     '''
 
     :param user_id_post:
@@ -52,6 +53,8 @@ def submit_job_request(user_id_post, email_post, description_post, user_submit_p
     job_to_add.listOfBidders = [{user_id_post:email_post}, {user_id_post:'testing'}]
     job_to_add.listOfBids = [10, 11]
     job_to_add.jobCategory = job_category
+    job_to_add.userAvgRating = user.avgRating
+    job_to_add.userNumRating = user.numRatings
     job_to_add.save()
 
     returnDict = {}

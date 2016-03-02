@@ -83,6 +83,19 @@ def check_user_id(objectID):
         returnDict['message'] = 'objectID does not exist'
         return returnDict
 
+def get_user(objectID, emailString):
+    '''
+    Returns the user object
+    :param objectID: objectID to look for
+    :param emailString: email to look for
+    :return: user object (or none if it does not exist)
+    '''
+    try:
+        checkForUser = User.objects.get(id=objectID, email=emailString)
+        return checkForUser
+    except User.DoesNotExist:
+        return None
+
 def check_user_id_and_email(objectID, emailString):
     returnDict = {}
     try:

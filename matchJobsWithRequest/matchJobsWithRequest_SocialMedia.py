@@ -1,12 +1,13 @@
-__author__ = 'michaell'
+from operator import itemgetter
 
+__author__ = 'michaell'
 from requestJob.models import *
 from json import loads
 
 while(1):
     #all job requests gotten from DB
     #only get
-    listOfAllJobRequest = job_request.objects.filter(jobCategory='copywriting')[:50]
+    listOfAllJobRequest = job_request.objects.filter(jobCategory='social media')[:50]
     listOfAllJobRequest = loads(listOfAllJobRequest.to_json())
     '''
     Grab all the job_search objects so we dont have to make multiple DB requests
@@ -25,7 +26,8 @@ while(1):
     json2.sort(key=itemgetter('userSubmitPrice')) #sorts in place
 
     '''
-    listOfAllJobSearches = job_search.objects.filter(jobCategory='copywriting')[:50]
+    listOfAllJobSearches = job_search.objects.filter(jobCategory='social media')[:50]
     listOfAllJobSearches = loads(listOfAllJobSearches.to_json())
+    listOfAllJobRequest.sort(key=itemgetter('userSubmitPrice')) #sorts in place
 
 

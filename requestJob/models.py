@@ -11,6 +11,8 @@ class job_request(document.Document):
     Class for a job request submitted by a user LOOKING for an assystant
     '''
     userId = ObjectIdField(required=True) #user objectID
+    userAvgRating = DecimalField(precision=3,required=True, default=0)
+    userNumRating = IntField(required=True, default=0)
     email = StringField(required=True)
     stillSearching = BooleanField(required=True, default=True)
     timeOfRequest = DateTimeField()

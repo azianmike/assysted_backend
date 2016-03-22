@@ -25,8 +25,6 @@ class JobSearchTests(TestCase):
 
         try:
             checkForJobSearch = job_search.objects.get( userId = '56b2cd3e3907c32099dbad18', userRequestPrice = 10, jobCategory='copywriting' )
-            self.assertEqual(checkForJobSearch.userAvgRating, 3.5)
-            self.assertEqual(checkForJobSearch.userNumRating, 2)
             checkForJobSearch.delete()
         except job_search.DoesNotExist:
             self.assertEqual(True, False, "Job search does not exist in mongo")
@@ -51,6 +49,8 @@ class JobSearchTests(TestCase):
 
         try:
             checkForJobSearch = job_request.objects.get( userId = '56b2cd3e3907c32099dbad18', userSubmitPrice = 10, jobCategory='copywriting' )
+            self.assertEqual(checkForJobSearch.userAvgRating, 3.5)
+            self.assertEqual(checkForJobSearch.userNumRating, 2)
             checkForJobSearch.delete()
         except job_search.DoesNotExist:
             self.assertEqual(True, False, "Job request does not exist in mongo")

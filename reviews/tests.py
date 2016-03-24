@@ -25,7 +25,7 @@ class SubmitReviewTest(TestCase):
         self.assertEqual(responseObj['message'], 'Job request successful')
 
         try:
-            checkForJobSearch = job_search.objects.get( userId = '56b2cd3e3907c32099dbad18', userRequestPrice = 10, jobCategory='copywriting' )
+            checkForJobSearch = job_search.objects.get( userId = '56aeec653907c30d1b276594', userRequestPrice = 10, jobCategory='copywriting' )
         except job_search.DoesNotExist:
             self.assertEqual(True, False, "Job search does not exist in mongo")
 

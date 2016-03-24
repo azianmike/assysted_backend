@@ -11,7 +11,7 @@ class JobSearchTests(TestCase):
         print 'test_submit_search'
         submitPostData = {'userId':'56b2cd3e3907c32099dbad18'}
         submitPostData['email'] = 'testhash2@test.com'
-        submitPostData['userRequestPrice'] = 10
+        submitPostData['userSearchPrice'] = 10
         submitPostData['jobCategory'] = 'copywriting'
         full_url = url+'api/searchJob'
         response = post(full_url, data=submitPostData)
@@ -77,7 +77,7 @@ class JobSearchTests(TestCase):
         print 'test_submit_search_invalid_price'
         submitPostData = {'userId':'56b2cd3e3907c32099dbad18'}
         submitPostData['email'] = 'testhash2@test.com'
-        submitPostData['userRequestPrice'] = 6
+        submitPostData['userSearchPrice'] = 6
         submitPostData['jobCategory'] = 'copywriting'
         full_url = url+'api/searchJob'
         response = post(full_url, data=submitPostData)

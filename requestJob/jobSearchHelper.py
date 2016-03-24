@@ -17,7 +17,7 @@ def submitJobSearch( request ):
 
     userIdPost = request.POST.get('userId','')
     emailPost = request.POST.get('email', '')
-    userRequestPrice = request.POST.get('userRequestPrice', '')
+    userRequestPrice = request.POST.get('userSearchPrice', '')
     jobCategory = request.POST.get('jobCategory', '')
 
     checkUser = get_user(userIdPost, emailPost)

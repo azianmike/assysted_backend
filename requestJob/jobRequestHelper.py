@@ -28,7 +28,7 @@ def submitJobRequest( request ):
 
     if check_user_id_and_email(userIdPost, emailPost):
         if is_valid_category(jobCategory):
-            return submit_job_request(userIdPost, emailPost, descriptionPost, userSubmitPrice, jobCategory, checkUser)
+            return submit_job_request(userIdPost, emailPost, descriptionPost, userSubmitPrice, jobCategory)
         else:
             return create_return_dict(-1, 'Invalid job category')
     else:

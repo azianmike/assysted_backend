@@ -1,6 +1,6 @@
 from requestJob.helper_func import create_return_dict
 from requestJob.models import job_search
-from login.loginHelper import check_user_id_and_email
+from login.loginHelper import check_user_id_and_email, get_user
 from requestJob.job_categories import is_valid_category
 
 def invalid_price( price ):
@@ -20,19 +20,21 @@ def submitJobSearch( request ):
     userRequestPrice = request.POST.get('userRequestPrice', '')
     jobCategory = request.POST.get('jobCategory', '')
 
+    checkUser = get_user(userIdPost, emailPost)
+
     if invalid_price( int(userRequestPrice) ):
         return create_return_dict(-1, 'Invalid request price')
 
-    if check_user_id_and_email(userIdPost, emailPost)['success'] == 1:
+    if checkUser is not None:
         if is_valid_category(jobCategory):
-            return submit_job_search(userIdPost, emailPost, userRequestPrice, jobCategory)
+            return submit_job_search(userIdPost, emailPost, userRequestPrice, jobCategory, checkUser)
         else:
             return create_return_dict(-1, 'Invalid job category')
     else:
         return create_return_dict(-1,'User does not exist!' )
 
 
-def submit_job_search(user_id_post, email_post, userRequestPrice, jobCategory):
+def submit_job_search(user_id_post, email_post, userRequestPrice, jobCategory, user):
     '''
 
     :param user_id_post:
@@ -46,6 +48,8 @@ def submit_job_search(user_id_post, email_post, userRequestPrice, jobCategory):
     jobSearchToAdd.timeOfRequest = datetime.now()
     jobSearchToAdd.userRequestPrice = int(userRequestPrice)
     jobSearchToAdd.jobCategory = jobCategory
+    jobSearchToAdd.userAvgRating = user.avgRating
+    jobSearchToAdd.userNumRating = user.numRatings
     jobSearchToAdd.save()
 
     returnDict = {}

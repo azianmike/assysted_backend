@@ -22,20 +22,21 @@ def submitJobRequest( request ):
     descriptionPost = request.POST.get('description', '')
     userSubmitPrice = request.POST.get('userRequestPrice', '')
     jobCategory = request.POST.get('jobCategory', '')
+    instantMatchPost = request.POST.get('instantMatch', False)
 
     if invalid_price( int(userSubmitPrice) ):
         return create_return_dict(-1, 'Invalid request price')
 
     if check_user_id_and_email(userIdPost, emailPost):
         if is_valid_category(jobCategory):
-            return submit_job_request(userIdPost, emailPost, descriptionPost, userSubmitPrice, jobCategory)
+            return submit_job_request(userIdPost, emailPost, descriptionPost, userSubmitPrice, jobCategory, instantMatchPost)
         else:
             return create_return_dict(-1, 'Invalid job category')
     else:
         return create_return_dict(-1, 'User does not exist!')
 
 
-def submit_job_request(user_id_post, email_post, description_post, user_submit_price, job_category):
+def submit_job_request(user_id_post, email_post, description_post, user_submit_price, job_category, instantMatch):
     '''
 
     :param user_id_post:
@@ -52,6 +53,7 @@ def submit_job_request(user_id_post, email_post, description_post, user_submit_p
     job_to_add.listOfBidders = [{user_id_post:email_post}, {user_id_post:'testing'}]
     job_to_add.listOfBids = [10, 11]
     job_to_add.jobCategory = job_category
+    job_to_add.instantMatch = instantMatch
     job_to_add.save()
 
     returnDict = {}

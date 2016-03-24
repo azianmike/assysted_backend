@@ -19,6 +19,9 @@ class job_request(document.Document):
     listOfBidders = ListField( field=DictField(), required=True )
     listOfBids = ListField( field=IntField(), required=True )
     jobCategory = StringField(required=True)
+    #Instant match: matches with a search if the userAvgRating >=4.5 and userNumRating >=5
+    instantMatch = BooleanField(required=True, default=False)
+    completed = BooleanField(required=True, default=False)
 
 class job_search(document.Document):
     '''

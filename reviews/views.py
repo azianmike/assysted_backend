@@ -64,6 +64,7 @@ def update_job_search_rating(userBeingReviewed, listOfNewAvgAndCount ):
     :return:
     '''
     setOfJobSearches = job_search.objects.filter( userId=userBeingReviewed )
-    setOfJobSearches.userAvgRating = listOfNewAvgAndCount[0]
-    setOfJobSearches.userNumRating = listOfNewAvgAndCount[1]
-    setOfJobSearches.save()
+    for jobSearch in setOfJobSearches:
+        jobSearch.userAvgRating = listOfNewAvgAndCount[0]
+        jobSearch.userNumRating = listOfNewAvgAndCount[1]
+        jobSearch.save()

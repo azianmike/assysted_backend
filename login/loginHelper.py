@@ -18,14 +18,15 @@ def loginUser(request):
     passwordPost = request.POST.get("password", "")
 
     #try catch to see if user exists
-    return loginWithEmailAndName(emailPost, passwordPost)
+    return loginWithEmailAndPassword(emailPost, passwordPost)
 
 
-def loginWithEmailAndName(emailPost, passwordPost):
+def loginWithEmailAndPassword(emailPost, passwordPost):
     '''
-    :param emailPost:
-    :param passwordPost:
-    :return:
+    Logs a user in with an email and a password
+    :param emailPost: email to log in with (if valid)
+    :param passwordPost: password to log in with (if valid)
+    :return: returns a dict with a 'success' message and a success code
     '''
     returnDict = {}
     returnDict['success'] = -1
@@ -38,7 +39,7 @@ def loginWithEmailAndName(emailPost, passwordPost):
             returnDict['message'] = 'Please activate your email'
             return returnDict
         returnDict['success'] = 1
-        returnDict['objectID'] = str(checkForUser.id)
+        returnDict['id'] = str(checkForUser.id)
         return returnDict
     except User.DoesNotExist:
         returnDict['success'] = 0

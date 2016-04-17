@@ -20,23 +20,23 @@ def submitJobRequest( request ):
     userIdPost = request.POST.get('userId','')
     emailPost = request.POST.get('email', '')
     descriptionPost = request.POST.get('description', '')
-    userSubmitPrice = request.POST.get('userRequestPrice', '')
+    userSubmitPrice = request.POST.get('userRequestPrice', 50)
     jobCategory = request.POST.get('jobCategory', '')
-    instantMatchPost = request.POST.get('instantMatch', False)
 
     if invalid_price( int(userSubmitPrice) ):
         return create_return_dict(-1, 'Invalid request price')
 
     if check_user_id_and_email(userIdPost, emailPost):
         if is_valid_category(jobCategory):
-            return submit_job_request(userIdPost, emailPost, descriptionPost, userSubmitPrice, jobCategory, instantMatchPost)
+
+            return submit_job_request(userIdPost, emailPost, descriptionPost, jobCategory)
         else:
             return create_return_dict(-1, 'Invalid job category')
     else:
         return create_return_dict(-1, 'User does not exist!')
 
 
-def submit_job_request(user_id_post, email_post, description_post, user_submit_price, job_category, instantMatch):
+def submit_job_request(user_id_post, email_post, description_post, job_category):
     '''
 
     :param user_id_post:
@@ -48,12 +48,9 @@ def submit_job_request(user_id_post, email_post, description_post, user_submit_p
     job_to_add = job_request(userId=user_id_post, email=email_post, stillSearching=True)
     from datetime import datetime
     job_to_add.timeOfRequest = datetime.now()
-    job_to_add.userSubmitPrice = int(user_submit_price)
+    job_to_add.userSubmitPrice = 50  #default to 50/hr for now
     job_to_add.description = description_post
-    job_to_add.listOfBidders = [{user_id_post:email_post}, {user_id_post:'testing'}]
-    job_to_add.listOfBids = [10, 11]
     job_to_add.jobCategory = job_category
-    job_to_add.instantMatch = instantMatch
     job_to_add.save()
 
     returnDict = {}
